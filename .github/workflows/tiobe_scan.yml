@@ -25,11 +25,15 @@ jobs:
 
       - name: Run tox tests to create coverage.xml
         run: |
+          tox run -e katib-controller-unit
+          tox run -e katib-db-manager-unit
           
 
       - name: move results to necessary folder for TICS
         run: |
           mkdir cover
+          cp charms/katib-controller/coverage.xml cover/katib-controller.xml
+          cp charms/katib-db-manager/coverage.xml cover/katib-db-manager.xml
           
 
       - name: Run TICS analysis with github-action
